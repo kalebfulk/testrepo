@@ -19,3 +19,4 @@ ORDER BY GEONAME ASC
 
 SELECT *
 FROM #base
+WHERE SERIES = 'Count of Appraisals'
