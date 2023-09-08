@@ -1,0 +1,21 @@
+DROP TABLE
+
+IF EXISTS #BASE
+	SELECT *
+	INTO #base
+	FROM homedb.dbo.fhfa_uad_allgeo
+	WHERE SERIES = 'Count of Appraisals'
+		AND quarter = 5
+		AND GEOLEVEL = 'State'
+		AND PURPOSE <> 'Both';
+
+SELECT GEONAME,
+	PURPOSE,
+	sum(value) 'Total Count'
+FROM #base b
+GROUP BY GEONAME,
+	PURPOSE
+ORDER BY GEONAME ASC
+
+SELECT *
+FROM #base
